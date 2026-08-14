@@ -1,0 +1,119 @@
+{
+  "project_name": "ITACAN - Restaurant & Bar",
+  "brand_positioning": "Italian Craft \u00d7 Dominican Caribbean Soul",
+  "theme": "Light theme primary (Warm Ivory) with Dark mode sections (Deep Blue)",
+  "typography": {
+    "headings": {
+      "family": "Cormorant Garamond, serif",
+      "weights": ["400", "500", "600"],
+      "usage": "H1, H2, H3, Editorial quotes, manifesto chapters"
+    },
+    "body": {
+      "family": "Manrope, sans-serif",
+      "weights": ["400", "500", "600"],
+      "usage": "Body text, UI elements, navigation, buttons, small labels"
+    },
+    "instructions_to_main_agent": "Ensure tight tracking on large Cormorant Garamond headings. Manrope must be used for highly legible UI elements. No generic fonts like Inter for headings. Include @import url for Google Fonts in index.css."
+  },
+  "colors": {
+    "primary": "#074269",
+    "primary_description": "ITACAN Deep Blue - Used for dark sections, footer, nightlife areas.",
+    "accent": "#2E73A6",
+    "accent_description": "Ocean Accent - Used sparingly for hover states, accents, wave graphic.",
+    "background_light": "#F5F1EA",
+    "background_light_description": "Warm Ivory - Primary light background.",
+    "neutral_secondary": "#D9CFBF",
+    "neutral_secondary_description": "Warm Sand - Secondary neutral.",
+    "text_dark": "#111820",
+    "text_dark_description": "Ink - Primary text color on light backgrounds.",
+    "text_light": "#FFFFFF",
+    "text_light_description": "White - Primary text color on deep blue backgrounds."
+  },
+  "visual_enhancers": {
+    "signature_asset": "Double-wave graphic. Use consistently as a divider/accent. E.g. as an SVG line separating sections (using Ocean Accent).",
+    "border_radius": "rounded-none or max rounded-sm. Premium restaurants use sharp or very subtly rounded edges.",
+    "shadows": "Minimal. Rely on 1px subtle borders (border-neutral-secondary) or high-contrast edge definitions.",
+    "glassmorphism": "Used only for the sticky header if overlapping hero image. backdrop-blur-xl bg-white/70 (light mode) or bg-[#074269]/80 (dark sections).",
+    "noise_texture": "Add a very subtle grain overlay (opacity 2-3%) across the entire site to prevent digital flatness and add warmth."
+  },
+  "layouts": {
+    "spacing": "Generous Spacing Philosophy. Use py-24 or py-32 for section vertical padding. gap-12 or gap-16 between grid items.",
+    "grid": "Bento or Swiss Grid style for menu previews. Asymmetrical text and image pairings. Mode A: Tetris Grid.",
+    "hero": "Large kinetic hero, masked line-by-line reveal on load. Use a striking background image with bg-[#111820]/30 overlay so the image breathes.",
+    "footer": "Massive py-20, Deep Blue background (#074269), large text for 'Let's Talk / Tisch reservieren', Ocean Accent links."
+  },
+  "motion": {
+    "scrolling": "Lenis smooth scrolling MUST be installed and configured in App.js or main layout.",
+    "reveals": "Framer Motion scroll reveals (staggered fade-up, line-by-line text reveals).",
+    "marquee": "One slow editorial marquee using react-fast-marquee. e.g. for repeating 'EAT. DRINK. STAY. DANCE.' with serif font.",
+    "parallax": "One subtle parallax hero moment or image reveal on scroll.",
+    "micro_interactions": "Hover states on menu items and buttons (e.g. slight transform, color fade).",
+    "instructions_to_main_agent": "Do NOT apply universal transitions like 'transition: all'. Use specific transitions. Add aria-hidden='true' to purely decorative animations."
+  },
+  "accessibility": {
+    "contrast": "Ensure WCAG AA contrast, especially for Ink text on Sand/Ivory, and White text on Deep Blue.",
+    "test_ids": "Add data-testid attributes to all interactive elements (buttons, links, form inputs)."
+  },
+  "media": {
+    "image_urls": {
+      "hero_interior": {
+        "url": "https://images.pexels.com/photos/14882031/pexels-photo-14882031.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Warm, illuminated luxury bar/restaurant interior"
+      },
+      "dining_vibe": {
+        "url": "https://images.pexels.com/photos/38773987/pexels-photo-38773987.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+        "description": "Chic setup with crystal glassware and elegant decor"
+      },
+      "cucina_pizza": {
+        "url": "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzR8MHwxfHNlYXJjaHwxfHxnb3VybWV0JTIwcGl6emElMjBwaW5zYSUyMGNsb3NlJTIwdXB8ZW58MHx8fHwxNzg2NzQ1MzkyfDA&ixlib=rb-4.1.0&q=85",
+        "description": "Gourmet Pinsa/Pizza"
+      },
+      "caribe_plantain": {
+        "url": "https://images.unsplash.com/photo-1762884601729-0eeeafbdfb8a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA3MDB8MHwxfHNlYXJjaHwxfHxjYXJpYmJlYW4lMjBwbGFudGFpbiUyMHRyb3BpY2FsJTIwZm9vZHxlbnwwfHx8fDE3ODY3NDUzOTJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "Caribbean plantain/banana chips"
+      },
+      "bar_cocktail": {
+        "url": "https://images.unsplash.com/photo-1778104959469-0861d423de46?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwzfHxjcmFmdCUyMGNvY2t0YWlsJTIwYmFyJTIwZGFyayUyMG1vb2R5fGVufDB8fHx8MTc4Njc0NTM5Mnww&ixlib=rb-4.1.0&q=85",
+        "description": "Craft cocktail"
+      },
+      "nightlife_dancing": {
+        "url": "https://images.unsplash.com/photo-1575444758702-4a6b9222336e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODF8MHwxfHNlYXJjaHwyfHxuaWdodGxpZmUlMjBkYW5jaW5nJTIwcmVzdGF1cmFudCUyMGJhcnxlbnwwfHx8fDE3ODY3NDUzOTJ8MA&ixlib=rb-4.1.0&q=85",
+        "description": "People enjoying the bar nightlife"
+      }
+    },
+    "instructions_to_main_agent": "Use ONLY these image URLs. Never use generic placeholder services. Treat photography deliberately (spotlight layouts, clipped frames)."
+  },
+  "pages_and_routes": [
+    {
+      "path": "/",
+      "components": ["Hero", "ExperiencePillars (Cucina/Caribe/Nights)", "MenuPreview", "BarAndNights (Deep Blue section)", "EventsTeaser", "ReservationCTA"]
+    },
+    {
+      "path": "/speisekarte",
+      "components": ["MenuHeader", "StructuredMenuCategories"]
+    },
+    {
+      "path": "/events",
+      "components": ["EventsHeader", "EventList", "EmptyState"]
+    },
+    {
+      "path": "/ueber-itacan",
+      "components": ["AboutHero", "NumberedManifestoChapters"]
+    },
+    {
+      "path": "/kontakt",
+      "components": ["ContactInfo", "MapBox", "SocialLinks", "OpeningHours"]
+    }
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic outputs. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Do NOT use complete transparent backgrounds for the sticky header; use backdrop-blur + semi-transparent color (glassmorphism).",
+    "Do NOT apply universal transitions (e.g. transition: all). Target specific properties.",
+    "Do NOT center align the entire App container.",
+    "Use 2-3x more spacing than typical. Use py-24 or py-32 for sections.",
+    "NEVER use placeholder services (via.placeholder.com). Use the provided image URLs.",
+    "All interactive elements MUST have data-testid.",
+    "Provide exact installation commands for external libraries: npm install framer-motion lucide-react react-fast-marquee @studio-freight/lenis clsx tailwind-merge",
+    "Implement DE/EN language toggle logic (can be simple state or placeholder context for MVP)."
+  ]
+}

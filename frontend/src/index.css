@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 38 33% 94%;
+        --foreground: 213 30% 9%;
+        --card: 38 33% 94%;
+        --card-foreground: 213 30% 9%;
+        --popover: 38 33% 94%;
+        --popover-foreground: 213 30% 9%;
+        --primary: 205 87% 22%;
+        --primary-foreground: 38 33% 94%;
+        --secondary: 36 22% 86%;
+        --secondary-foreground: 213 30% 9%;
+        --muted: 36 22% 86%;
+        --muted-foreground: 210 16% 27%;
+        --accent: 204 57% 42%;
+        --accent-foreground: 38 33% 94%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 36 15% 80%;
+        --input: 36 15% 80%;
+        --ring: 205 87% 22%;
+        --radius: 0.25rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        @apply bg-ivory text-ink font-sans antialiased;
+        text-rendering: optimizeLegibility;
+    }
+    ::selection {
+        background-color: #074269;
+        color: #F5F1EA;
+    }
+    :focus-visible {
+        outline: 2px solid #2E73A6;
+        outline-offset: 3px;
+    }
+}
+
+/* Subtle grain overlay — warmth, no digital flatness */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer base {
+    [data-debug-wrapper="true"] {
+        display: contents !important;
+    }
+
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit;
+        margin-right: inherit;
+        margin-top: inherit;
+        margin-bottom: inherit;
+        padding-left: inherit;
+        padding-right: inherit;
+        padding-top: inherit;
+        padding-bottom: inherit;
+        column-gap: inherit;
+        row-gap: inherit;
+        gap: inherit;
+        border-left-width: inherit;
+        border-right-width: inherit;
+        border-top-width: inherit;
+        border-bottom-width: inherit;
+        border-left-style: inherit;
+        border-right-style: inherit;
+        border-top-style: inherit;
+        border-bottom-style: inherit;
+        border-left-color: inherit;
+        border-right-color: inherit;
+        border-top-color: inherit;
+        border-bottom-color: inherit;
+    }
+}
+
+@layer components {
+    .container-site {
+        @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-12;
+    }
+    .eyebrow {
+        @apply font-sans text-xs font-semibold uppercase tracking-eyebrow text-ocean;
+    }
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-sm bg-deep px-7 py-3.5 font-sans text-sm font-semibold uppercase tracking-[0.14em] text-ivory transition-[background-color,transform] duration-300 hover:bg-ocean hover:-translate-y-0.5;
+    }
+    .btn-outline-light {
+        @apply inline-flex items-center justify-center gap-2 rounded-sm border border-ivory/60 px-7 py-3.5 font-sans text-sm font-semibold uppercase tracking-[0.14em] text-ivory transition-[background-color,border-color,transform] duration-300 hover:bg-ivory hover:text-deep hover:-translate-y-0.5;
+    }
+    .btn-outline-dark {
+        @apply inline-flex items-center justify-center gap-2 rounded-sm border border-deep/40 px-7 py-3.5 font-sans text-sm font-semibold uppercase tracking-[0.14em] text-deep transition-[background-color,border-color,color,transform] duration-300 hover:bg-deep hover:text-ivory hover:-translate-y-0.5;
+    }
+    .link-underline {
+        @apply relative text-inherit transition-colors duration-300 hover:text-ocean;
+    }
+    .headline-serif {
+        @apply font-serif font-medium leading-[1.02] tracking-tight;
+    }
+}
+
+/* Lenis smooth-scroll recommendation */
+html.lenis, html.lenis body {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
