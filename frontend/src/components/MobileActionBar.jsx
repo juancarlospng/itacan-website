@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { UtensilsCrossed, CalendarCheck } from "lucide-react";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { restaurant } from "../config/restaurant";
 
 /**

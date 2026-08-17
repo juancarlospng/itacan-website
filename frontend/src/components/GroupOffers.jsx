@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import SEO from "./SEO";
 import Reveal from "./Reveal";
 import MediaImage from "./MediaImage";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { groupOffers } from "../data/menu";
 import { restaurant } from "../config/restaurant";
 

@@ -14,6 +14,9 @@ export const copy = {
     reserve: "Tisch reservieren",
     openMenu: "Menü öffnen",
     closeMenu: "Menü schliessen",
+    skipContent: "Zum Inhalt springen",
+    home: "Startseite",
+    mainNavigation: "Hauptnavigation",
   },
   actionBar: {
     menu: "Speisekarte",
@@ -101,6 +104,7 @@ export const copy = {
     lunchTitle: "Lunch bei ITACAN",
     wineGlass: "1 dl",
     wineBottle: "75 cl",
+    categoriesLabel: "Speisekarte Kategorien",
   },
   aboutPage: {
     heroHeadline: "Hinter ITACAN steckt mehr als eine Küche.",

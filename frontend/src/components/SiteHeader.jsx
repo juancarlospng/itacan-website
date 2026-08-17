@@ -4,8 +4,9 @@ import { AnimatePresence, motion, useMotionValue, useSpring } from "framer-motio
 import { Menu } from "lucide-react";
 import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { restaurant } from "../config/restaurant";
+import LanguageSelector from "./LanguageSelector";
 
 /**
  * ITACAN signature navbar wave.
@@ -91,11 +92,11 @@ const SiteHeader = () => {
         }`}
       >
         <div className="container-site flex h-[4.5rem] items-center justify-between gap-6 sm:h-20">
-          <Link to="/" aria-label="ITACAN — Startseite" data-testid="header-logo-link" className="shrink-0">
+          <Link to="/" aria-label={`ITACAN — ${copy.nav.home}`} data-testid="header-logo-link" className="shrink-0">
             <Logo tone="light" className="h-8 sm:h-9" />
           </Link>
 
-          <nav aria-label="Hauptnavigation" className="hidden items-center gap-8 lg:flex">
+          <nav aria-label={copy.nav.mainNavigation} className="hidden items-center gap-6 xl:gap-8 lg:flex">
             {links.map((l) =>
               l.hash ? (
                 <Link key={l.to} to={l.to} data-testid={l.testId} className={linkClass(false)}>
@@ -119,6 +120,7 @@ const SiteHeader = () => {
             >
               {copy.nav.reserve}
             </a>
+            <LanguageSelector />
             <button
               type="button"
               data-testid="mobile-menu-open-button"
