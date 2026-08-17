@@ -133,6 +133,15 @@
     width: calc((100vw - 2rem - 0.15rem) / 1.15);
 }
 
+/* On touch-sized screens the visible next card already communicates that the
+   rail continues, so keep both edges crisp instead of masking content. */
+@media (max-width: 639px) {
+    .menu-discovery-rail {
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
+    }
+}
+
 @media (min-width: 640px) {
     .menu-discovery-rail {
         --discovery-gap: 1.25rem;
