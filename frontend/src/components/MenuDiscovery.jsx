@@ -40,14 +40,14 @@ const DishCard = ({ item }) => {
   return (
     <div
       data-testid={`dish-card-${item.id}`}
-      className="group w-[80vw] max-w-[340px] shrink-0 snap-start transition-transform duration-300 hover:-translate-y-1 sm:w-[300px] lg:w-[330px] xl:w-[340px]"
+      className="menu-discovery-card group shrink-0 snap-start transition-transform duration-300 hover:-translate-y-1"
     >
       <div className="relative overflow-hidden rounded-[10px] border border-ink/5 shadow-[0_20px_44px_-26px_rgba(7,65,105,0.4)]">
         {image ? (
           <MediaImage
             image={image}
             ratio="aspect-[4/5]"
-            sizes="(max-width: 640px) 80vw, 340px"
+            sizes="(max-width: 639px) 80vw, (max-width: 899px) 44vw, (max-width: 1279px) 28vw, (max-width: 2239px) 25vw, 520px"
             imgClassName="transition-transform duration-300 ease-out group-hover:scale-[1.03]"
           />
         ) : (
@@ -98,8 +98,14 @@ const Rail = ({ rail }) => {
 
   useEffect(() => {
     update();
+    const el = scrollRef.current;
+    const resizeObserver = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(update);
+    if (el) resizeObserver?.observe(el);
     window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", update);
+    };
   }, [update]);
 
   if (items.length === 0) return null;
@@ -151,7 +157,7 @@ const Rail = ({ rail }) => {
         ref={scrollRef}
         onScroll={update}
         style={{ maskImage, WebkitMaskImage: maskImage }}
-        className="no-scrollbar mt-7 flex snap-x snap-mandatory gap-5 overflow-x-auto px-4 pb-3 pt-1 sm:px-7 lg:snap-proximity lg:px-10"
+        className={`menu-discovery-rail no-scrollbar mt-7 flex snap-x snap-mandatory overflow-x-auto pb-3 pt-1 lg:snap-proximity ${canScroll ? "" : "justify-center"}`}
       >
         {items.map((item) => (
           <DishCard key={item.id} item={item} />
