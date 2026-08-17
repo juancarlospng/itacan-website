@@ -1,6 +1,6 @@
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { restaurant } from "../config/restaurant";
 
 /**

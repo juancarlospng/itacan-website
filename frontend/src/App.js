@@ -11,6 +11,8 @@ import AboutPage from "@/pages/AboutPage";
 import ContactPage from "@/pages/ContactPage";
 import { ImpressumPage, DatenschutzPage, AgbPage } from "@/pages/LegalPage";
 import { restaurant } from "@/config/restaurant";
+import { LanguageProvider } from "@/i18n/LanguageContext";
+import { copy } from "@/copy";
 
 const ScrollManager = () => {
   const { pathname, hash } = useLocation();
@@ -44,7 +46,7 @@ const Shell = () => (
       data-testid="skip-to-content-link"
       className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-sm focus:bg-deep focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ivory"
     >
-      Zum Inhalt springen
+      {copy.nav.skipContent}
     </a>
     <SiteHeader />
     <div id="main-content">
@@ -74,7 +76,7 @@ const Shell = () => (
 function App() {
   return (
     <BrowserRouter>
-      <Shell />
+      <LanguageProvider>{(language) => <Shell key={language} />}</LanguageProvider>
     </BrowserRouter>
   );
 }

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Instagram, MapPin, Phone, Mail } from "lucide-react";
 import Logo from "./Logo";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { restaurant } from "../config/restaurant";
 
 const TikTokIcon = ({ className }) => (

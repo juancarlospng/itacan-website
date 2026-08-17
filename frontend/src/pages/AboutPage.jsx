@@ -2,7 +2,7 @@ import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import MediaImage from "../components/MediaImage";
 import SectionHeading from "../components/SectionHeading";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { media } from "../config/media";
 import { restaurant } from "../config/restaurant";
 

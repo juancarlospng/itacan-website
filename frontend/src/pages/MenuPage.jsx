@@ -2,7 +2,7 @@ import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import MediaImage from "../components/MediaImage";
 import GroupOffers from "../components/GroupOffers";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import {
   menuCategories,
   itemsByCategory,
@@ -143,7 +143,7 @@ const MenuPage = () => (
       </div>
     </section>
 
-    <nav aria-label="Speisekarte Kategorien" className="sticky top-[4.9rem] z-30 border-b border-sand-dark/50 bg-ivory/95 backdrop-blur-md sm:top-[5.6rem]">
+    <nav aria-label={copy.menuPage.categoriesLabel} className="sticky top-[4.9rem] z-30 border-b border-sand-dark/50 bg-ivory/95 backdrop-blur-md sm:top-[5.6rem]">
       <div className="container-site no-scrollbar flex gap-2 overflow-x-auto py-3.5">
         {menuCategories.map((c) => (
           <a

@@ -121,6 +121,55 @@
     display: none;
 }
 
+/* Menu Discovery breaks out of the editorial grid. Card width is derived from
+   the usable rail width so each breakpoint keeps an intentional next-card peek. */
+.menu-discovery-rail {
+    --discovery-gap: 1rem;
+    --discovery-gutter: 1rem;
+    gap: var(--discovery-gap);
+    padding-inline: var(--discovery-gutter);
+}
+.menu-discovery-card {
+    width: calc((100vw - 2rem - 0.15rem) / 1.15);
+}
+
+/* On touch-sized screens the visible next card already communicates that the
+   rail continues, so keep both edges crisp instead of masking content. */
+@media (max-width: 639px) {
+    .menu-discovery-rail {
+        mask-image: none !important;
+        -webkit-mask-image: none !important;
+    }
+}
+
+@media (min-width: 640px) {
+    .menu-discovery-rail {
+        --discovery-gap: 1.25rem;
+        --discovery-gutter: 1.5rem;
+    }
+    .menu-discovery-card {
+        width: calc((100vw - 3rem - 1.5625rem) / 2.25);
+    }
+}
+
+@media (min-width: 900px) {
+    .menu-discovery-rail {
+        --discovery-gutter: 2rem;
+    }
+    .menu-discovery-card {
+        width: calc((100vw - 4rem - 3.25rem) / 3.6);
+    }
+}
+
+@media (min-width: 1280px) {
+    .menu-discovery-rail {
+        --discovery-gutter: 2.5rem;
+    }
+    .menu-discovery-card {
+        width: min(520px, calc((100vw - 5rem - 3.75rem) / 4));
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
         animation-duration: 0.01ms !important;

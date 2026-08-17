@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
 import Logo from "./Logo";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { restaurant } from "../config/restaurant";
 
 const itemVariants = {

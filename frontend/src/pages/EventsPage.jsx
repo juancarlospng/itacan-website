@@ -5,7 +5,7 @@ import SectionHeading from "../components/SectionHeading";
 import EventCard from "../components/EventCard";
 import GroupOffers from "../components/GroupOffers";
 import EventInquiryForm from "../components/EventInquiryForm";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { activeEvents } from "../data/events";
 import { media } from "../config/media";
 

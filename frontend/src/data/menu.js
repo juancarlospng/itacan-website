@@ -36,7 +36,7 @@ export const discoveryRails = [
   { id: "dessert", title: "Desserts" },
 ];
 
-export const lunchNote =
+export let lunchNote =
   "Mittwoch, Donnerstag & Freitag · 11:30–14:00 · CHF 20.– inkl. Salat und Espresso";
 
 export const groupOffers = [
@@ -183,3 +183,92 @@ export const subgroupsInCategory = (categoryId) => {
 // Homepage Menu Discovery — reads from the SAME dataset
 export const railItems = (railId) =>
   menuItems.filter((i) => i.available && i.homeSections?.includes(railId)).sort(byOrder);
+
+const menuSnapshot = {
+  categories: JSON.parse(JSON.stringify(menuCategories)),
+  rails: JSON.parse(JSON.stringify(discoveryRails)),
+  offers: JSON.parse(JSON.stringify(groupOffers)),
+  items: JSON.parse(JSON.stringify(menuItems)),
+  wineSubgroups: JSON.parse(JSON.stringify(wineSubgroups)),
+  wines: JSON.parse(JSON.stringify(wineItems)),
+  notes: JSON.parse(JSON.stringify(menuNotes)),
+  lunchNote,
+};
+
+const menuLanguage = {
+  en: {
+    categories: ["Antipasti & Fritti", "Pinsa", "Pasta & Al Forno", "Meat & Fish", "Dominican specialities", "Desserts", "Wine", "Lunch", "Group offers"],
+    nav: ["Antipasti", "Pinsa", "Pasta", "Meat & Fish", "Dominican", "Desserts", "Wine", "Lunch", "Groups"],
+    rails: ["ITACAN selection", "Pinsa", "Pasta & Kitchen", "Caribbean soul", "Desserts"],
+    notes: ["All prices in CHF, VAT included.", "For information about allergens in individual dishes, please ask our staff."],
+    lunchNote: "Wednesday, Thursday & Friday · 11:30–14:00 · CHF 20.– incl. salad and espresso",
+    wineSubgroups: ["By the glass", "Bottles"],
+    dietary: { vegetarisch: "vegetarian", vegan: "vegan" },
+    offers: [{ priceSuffix: "per person", description: "A shared menu for the whole table with antipasti, pinsa, pasta, Dominican specialities and dessert.", note: "Reservation required.", cta: "Enquire about Tavolata" }, { priceSuffix: "per person", description: "One pinsa after another, with different flavours and a table that decides when it has had enough. Ideal for groups and friends.", note: "From 4 people.", cta: "Book Giro Pinsa" }],
+    replacements: [["Für 2 Personen", "For 2 people"], ["Zum Teilen", "To share"], ["Haus-Spezialität", "House speciality"], ["Hausgemachtes Tagesdessert", "Homemade dessert of the day"], ["Hausgemachtes Tiramisu", "Homemade tiramisu"], ["serviert mit", "served with"], ["leicht scharf", "mildly spicy"], ["Frittierte", "Fried"], ["Gebratene", "Pan-fried"], ["Gegrilltes", "Grilled"], ["Gebackene", "Baked"], ["Gemischte", "Mixed"], ["Gemischter", "Mixed"], ["hausgemachter", "homemade"], ["gefüllt mit", "filled with"], ["überbacken", "oven-baked"], ["Tomatensauce", "tomato sauce"], ["Büffelmozzarella", "buffalo mozzarella"], ["Cherry-Tomaten", "cherry tomatoes"], ["Champignons", "mushrooms"], ["Rohschinken", "prosciutto"], ["Vorderschinken", "ham"], ["scharfe Salami", "spicy salami"], ["Auberginen", "aubergines"], ["Zucchini", "courgettes"], ["Zucchetti", "courgettes"], ["Crevetten", "prawns"], ["Meeresfrüchten", "seafood"], ["Calamari", "squid"], ["Oktopus", "octopus"], ["Knoblauch", "garlic"], ["Zitrone", "lemon"], ["Kartoffeln", "potatoes"], ["Bratkartoffeln", "roast potatoes"], ["Kochbanane", "plantain"], ["kleinem Salat", "a small salad"], ["kleiner Salat", "a small salad"], ["Gemüse", "vegetables"], ["Rindshackfleisch", "minced beef"], ["Rindfleisch", "beef"], ["Poulet", "chicken"], ["Schweine", "pork"], ["Lachs", "salmon"], ["Rahmsauce", "cream sauce"], ["Trüffelcrème-Sauce", "truffle cream sauce"], ["Vanille", "vanilla"], ["Erdbeere", "strawberry"], ["Schokolade", "chocolate"], ["Kaffee", "coffee"], [" und ", " and "], [" mit ", " with "]],
+  },
+  fr: {
+    categories: ["Antipasti & Fritti", "Pinsa", "Pâtes & Al Forno", "Viandes & Poissons", "Spécialités dominicaines", "Desserts", "Vins", "Déjeuner", "Offres groupes"],
+    nav: ["Antipasti", "Pinsa", "Pâtes", "Viandes & Poissons", "Dominicain", "Desserts", "Vins", "Déjeuner", "Groupes"],
+    rails: ["Sélection ITACAN", "Pinsa", "Pâtes & Cuisine", "Âme caribéenne", "Desserts"],
+    notes: ["Tous les prix sont en CHF, TVA comprise.", "Pour toute information sur les allergènes, veuillez vous adresser à notre équipe."],
+    lunchNote: "Mercredi, jeudi & vendredi · 11:30–14:00 · CHF 20.– salade et espresso inclus",
+    wineSubgroups: ["Au verre", "Bouteilles"],
+    dietary: { vegetarisch: "végétarien", vegan: "végan" },
+    offers: [{ priceSuffix: "par personne", description: "Un menu à partager pour toute la table avec antipasti, pinsa, pâtes, spécialités dominicaines et dessert.", note: "Uniquement sur réservation.", cta: "Demander la Tavolata" }, { priceSuffix: "par personne", description: "Une pinsa après l'autre, différentes saveurs et une table qui décide quand elle en a assez. Idéal pour les groupes et les amis.", note: "À partir de 4 personnes.", cta: "Réserver le Giro Pinsa" }],
+    replacements: [["Für 2 Personen", "Pour 2 personnes"], ["Zum Teilen", "À partager"], ["Haus-Spezialität", "Spécialité maison"], ["Hausgemachtes Tagesdessert", "Dessert maison du jour"], ["Hausgemachtes Tiramisu", "Tiramisu maison"], ["serviert mit", "servi avec"], ["leicht scharf", "légèrement relevé"], ["Frittierte", "Frit"], ["Gebratene", "Poêlé"], ["Gegrilltes", "Grillé"], ["Gebackene", "Cuite au four"], ["Gemischte", "Assortiment de"], ["Gemischter", "Salade composée"], ["hausgemachter", "maison"], ["gefüllt mit", "farci de"], ["überbacken", "gratiné"], ["Tomatensauce", "sauce tomate"], ["Büffelmozzarella", "mozzarella di bufala"], ["Cherry-Tomaten", "tomates cerises"], ["Champignons", "champignons"], ["Rohschinken", "jambon cru"], ["Vorderschinken", "jambon"], ["scharfe Salami", "salami piquant"], ["Auberginen", "aubergines"], ["Zucchini", "courgettes"], ["Zucchetti", "courgettes"], ["Crevetten", "crevettes"], ["Meeresfrüchten", "fruits de mer"], ["Calamari", "calamars"], ["Oktopus", "poulpe"], ["Knoblauch", "ail"], ["Zitrone", "citron"], ["Bratkartoffeln", "pommes de terre rôties"], ["Kartoffeln", "pommes de terre"], ["Kochbanane", "banane plantain"], ["kleinem Salat", "une petite salade"], ["kleiner Salat", "une petite salade"], ["Gemüse", "légumes"], ["Rindshackfleisch", "bœuf haché"], ["Rindfleisch", "bœuf"], ["Poulet", "poulet"], ["Lachs", "saumon"], ["Rahmsauce", "sauce à la crème"], ["Vanille", "vanille"], ["Erdbeere", "fraise"], ["Schokolade", "chocolat"], ["Kaffee", "café"], [" und ", " et "], [" mit ", " avec "]],
+  },
+  it: {
+    categories: ["Antipasti & Fritti", "Pinsa", "Pasta & Al Forno", "Carne & Pesce", "Specialità dominicane", "Dessert", "Vini", "Pranzo", "Offerte per gruppi"],
+    nav: ["Antipasti", "Pinsa", "Pasta", "Carne & Pesce", "Dominicano", "Dessert", "Vini", "Pranzo", "Gruppi"],
+    rails: ["Selezione ITACAN", "Pinsa", "Pasta & Cucina", "Anima caraibica", "Dessert"],
+    notes: ["Tutti i prezzi sono in CHF, IVA inclusa.", "Per informazioni sugli allergeni, rivolgetevi al nostro personale."],
+    lunchNote: "Mercoledì, giovedì & venerdì · 11:30–14:00 · CHF 20.– insalata ed espresso inclusi",
+    wineSubgroups: ["Al bicchiere", "Bottiglie"],
+    dietary: { vegetarisch: "vegetariano", vegan: "vegano" },
+    offers: [{ priceSuffix: "a persona", description: "Un menu da condividere per tutto il tavolo con antipasti, pinsa, pasta, specialità dominicane e dessert.", note: "Solo su prenotazione.", cta: "Richiedi la Tavolata" }, { priceSuffix: "a persona", description: "Una pinsa dopo l'altra, gusti diversi e un tavolo che decide quando basta. Ideale per gruppi e amici.", note: "Da 4 persone.", cta: "Prenota Giro Pinsa" }],
+    replacements: [["Für 2 Personen", "Per 2 persone"], ["Zum Teilen", "Da condividere"], ["Haus-Spezialität", "Specialità della casa"], ["Hausgemachtes Tagesdessert", "Dolce del giorno fatto in casa"], ["Hausgemachtes Tiramisu", "Tiramisù fatto in casa"], ["serviert mit", "servito con"], ["leicht scharf", "leggermente piccante"], ["Frittierte", "Fritto"], ["Gebratene", "Saltato"], ["Gegrilltes", "Grigliato"], ["Gebackene", "Al forno"], ["Gemischte", "Misto di"], ["Gemischter", "Insalata mista"], ["hausgemachter", "fatto in casa"], ["gefüllt mit", "ripieno di"], ["überbacken", "gratinato"], ["Tomatensauce", "salsa di pomodoro"], ["Büffelmozzarella", "mozzarella di bufala"], ["Cherry-Tomaten", "pomodorini"], ["Champignons", "funghi"], ["Rohschinken", "prosciutto crudo"], ["Vorderschinken", "prosciutto"], ["scharfe Salami", "salame piccante"], ["Auberginen", "melanzane"], ["Zucchini", "zucchine"], ["Zucchetti", "zucchine"], ["Crevetten", "gamberi"], ["Meeresfrüchten", "frutti di mare"], ["Calamari", "calamari"], ["Oktopus", "polpo"], ["Knoblauch", "aglio"], ["Zitrone", "limone"], ["Bratkartoffeln", "patate arrosto"], ["Kartoffeln", "patate"], ["Kochbanane", "platano"], ["kleinem Salat", "una piccola insalata"], ["kleiner Salat", "una piccola insalata"], ["Gemüse", "verdure"], ["Rindshackfleisch", "manzo macinato"], ["Rindfleisch", "manzo"], ["Poulet", "pollo"], ["Lachs", "salmone"], ["Rahmsauce", "salsa alla panna"], ["Vanille", "vaniglia"], ["Erdbeere", "fragola"], ["Schokolade", "cioccolato"], ["Kaffee", "caffè"], [" und ", " e "], [" mit ", " con "]],
+  },
+};
+
+const replaceText = (value, replacements) => {
+  if (typeof value !== "string") return value;
+  return replacements.reduce((text, [source, target]) => text.split(source).join(target), value);
+};
+
+const exactMenuText = {
+  en: [["Knuspriges Brot mit Tomaten, Basilikum und Oregano", "Crispy bread with tomatoes, basil and oregano"], ["Frittierte Pouletstücke", "Fried chicken pieces"], ["Gemischter Salat", "Mixed salad"]],
+  fr: [["Knuspriges Brot mit Tomaten, Basilikum und Oregano", "Pain croustillant aux tomates, basilic et origan"], ["Frittierte Pouletstücke", "Morceaux de poulet frits"], ["Gemischter Salat", "Salade composée"]],
+  it: [["Knuspriges Brot mit Tomaten, Basilikum und Oregano", "Pane croccante con pomodori, basilico e origano"], ["Frittierte Pouletstücke", "Bocconcini di pollo fritti"], ["Gemischter Salat", "Insalata mista"]],
+};
+
+const restoreArray = (target, source) => target.splice(0, target.length, ...JSON.parse(JSON.stringify(source)));
+
+export const localizeMenu = (language) => {
+  restoreArray(menuCategories, menuSnapshot.categories);
+  restoreArray(discoveryRails, menuSnapshot.rails);
+  restoreArray(groupOffers, menuSnapshot.offers);
+  restoreArray(menuItems, menuSnapshot.items);
+  restoreArray(wineSubgroups, menuSnapshot.wineSubgroups);
+  restoreArray(wineItems, menuSnapshot.wines);
+  Object.assign(menuNotes, menuSnapshot.notes);
+  lunchNote = menuSnapshot.lunchNote;
+  if (language === "de" || !menuLanguage[language]) return;
+
+  const translation = menuLanguage[language];
+  const replacements = [...exactMenuText[language], ...translation.replacements];
+  menuCategories.forEach((category, index) => Object.assign(category, { label: translation.categories[index], navLabel: translation.nav[index] }));
+  discoveryRails.forEach((rail, index) => { rail.title = translation.rails[index]; });
+  menuItems.forEach((item) => {
+    ["name", "description", "tag"].forEach((field) => { if (item[field]) item[field] = replaceText(item[field], replacements); });
+  });
+  groupOffers.forEach((offer) => {
+    Object.assign(offer, translation.offers[groupOffers.indexOf(offer)]);
+  });
+  wineSubgroups.forEach((subgroup, index) => { subgroup.label = translation.wineSubgroups[index]; });
+  menuItems.forEach((item) => { if (item.dietary) item.dietary = item.dietary.map((value) => translation.dietary[value] || value); });
+  wineItems.forEach((wine) => { if (wine.detail) wine.detail = replaceText(wine.detail, replacements); });
+  menuNotes.prices = translation.notes[0];
+  menuNotes.allergens = translation.notes[1];
+  lunchNote = translation.lunchNote;
+};
