@@ -1,80 +1,98 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
-import WaveDivider from "../components/WaveDivider";
-import ReservationCTA from "../components/ReservationCTA";
-import EditorialMarquee from "../components/EditorialMarquee";
-import { useLanguage } from "../i18n/LanguageContext";
-import { images } from "../config/images";
+import MediaImage from "../components/MediaImage";
+import SectionHeading from "../components/SectionHeading";
+import { copy } from "../copy/de";
+import { media } from "../config/media";
+import { restaurant } from "../config/restaurant";
 
-const chapterImages = [images.cucinaWide, images.squareOne, images.banner, images.squareTwo];
+const teamImages = [media.teamChristian, media.teamMaribel, media.teamOctavio];
 
-const AboutPage = () => {
-  const { t } = useLanguage();
-  const chapters = t("about.chapters");
-  const heroRef = useRef(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
-  const imgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+const AboutPage = () => (
+  <>
+    <SEO title={copy.seo.about.title} description={copy.seo.about.desc} path="/ueber-uns" />
 
-  return (
-    <>
-      <SEO title={t("seo.about.title")} description={t("seo.about.desc")} path="/ueber-itacan" />
-      <section ref={heroRef} className="relative flex min-h-[70svh] items-end overflow-hidden bg-deep" data-testid="about-hero">
-        <motion.div style={{ y: imgY }} className="absolute inset-0">
-          <img src={images.banner.url} alt={images.banner.alt} className="h-full w-full object-cover" />
-        </motion.div>
-        <div className="absolute inset-0 bg-deep/65" aria-hidden="true" />
-        <div className="container-site relative pb-20 pt-48 text-ivory">
-          <Reveal>
-            <p className="eyebrow text-ocean-light">{t("about.eyebrow")}</p>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="headline-serif mt-5 max-w-3xl text-4xl sm:text-6xl lg:text-7xl">{t("about.title")}</h1>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="mt-7 max-w-xl text-base leading-relaxed text-ivory/80 sm:text-lg">{t("about.intro")}</p>
+    <section className="relative flex min-h-[62svh] items-end overflow-hidden bg-deep" data-testid="about-hero">
+      <div className="absolute inset-0">
+        <img src={media.story.src} alt={media.story.alt} style={{ objectPosition: media.story.position }} className="h-full w-full object-cover" />
+      </div>
+      <div className="absolute inset-0 bg-deep/60" aria-hidden="true" />
+      <div className="container-site relative pb-16 pt-44 text-ivory sm:pb-20">
+        <Reveal>
+          <h1 className="headline-serif max-w-3xl text-4xl sm:text-6xl">{copy.aboutPage.heroHeadline}</h1>
+        </Reveal>
+        <Reveal delay={0.14}>
+          <p className="mt-6 max-w-xl text-base leading-relaxed text-ivory/80 sm:text-lg">{copy.aboutPage.intro}</p>
+        </Reveal>
+      </div>
+    </section>
+
+    <main data-testid="about-content">
+      <section className="py-24 sm:py-32">
+        <div className="container-site grid items-center gap-12 lg:grid-cols-2 lg:gap-24">
+          <SectionHeading title={copy.aboutPage.philosophyHeadline} copy={copy.aboutPage.philosophyCopy} />
+          <Reveal delay={0.12}>
+            <MediaImage image={media.atmospherePrimary} ratio="aspect-[3/2]" className="rounded-sm" sizes="(max-width: 1024px) 100vw, 45vw" />
           </Reveal>
         </div>
       </section>
 
-      <EditorialMarquee />
-
-      <main className="container-site py-24 sm:py-32" data-testid="about-content">
-        <div className="grid gap-24 sm:gap-32">
-          {chapters.map((ch, i) => {
-            const img = chapterImages[i % chapterImages.length];
-            const reversed = i % 2 === 1;
-            return (
-              <section key={ch.n} data-testid={`about-chapter-${ch.n}`} className={`grid items-center gap-12 lg:grid-cols-2 lg:gap-20`}>
-                <Reveal className={reversed ? "lg:order-2" : ""}>
-                  <div className="relative overflow-hidden rounded-sm">
-                    <img src={img.url} alt={img.alt} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-700 ease-out hover:scale-105" />
-                  </div>
-                </Reveal>
-                <div className={reversed ? "lg:order-1" : ""}>
-                  <Reveal>
-                    <span className="font-serif text-6xl font-medium italic text-ocean/50 sm:text-7xl" aria-hidden="true">{ch.n}</span>
-                  </Reveal>
-                  <Reveal delay={0.1}>
-                    <h2 className="headline-serif mt-4 text-3xl text-ink sm:text-5xl">{ch.title}</h2>
-                  </Reveal>
-                  <Reveal delay={0.16}>
-                    <WaveDivider className="mt-6 w-24 text-ocean" />
-                  </Reveal>
-                  <Reveal delay={0.22}>
-                    <p className="mt-6 max-w-lg text-base leading-relaxed text-ink-soft sm:text-lg">{ch.copy}</p>
-                  </Reveal>
-                </div>
-              </section>
-            );
-          })}
+      <section className="bg-sand/30 py-24 sm:py-32">
+        <div className="container-site">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-24">
+            <div className="order-2 lg:order-1">
+              <SectionHeading title={copy.aboutPage.fusionHeadline} copy={copy.aboutPage.fusionCopy} />
+            </div>
+            <div className="order-1 grid grid-cols-2 items-start gap-5 lg:order-2">
+              <Reveal>
+                <MediaImage image={media.worldKitchen} ratio="aspect-[4/5]" className="rounded-sm" />
+              </Reveal>
+              <Reveal delay={0.12} className="mt-10">
+                <MediaImage image={media.caribbeanPrimary} ratio="aspect-[4/5]" className="rounded-sm" />
+              </Reveal>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
 
-      <ReservationCTA />
-    </>
-  );
-};
+      <section className="py-24 sm:py-32" data-testid="team-section">
+        <div className="container-site">
+          <SectionHeading eyebrow={copy.aboutPage.teamEyebrow} title={copy.aboutPage.teamHeadline} />
+          <div className="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-8">
+            {copy.aboutPage.team.map((member, i) => (
+              <Reveal key={member.name} delay={i * 0.1}>
+                <article data-testid={`team-member-${i}`} className="group">
+                  <div className="relative overflow-hidden rounded-sm">
+                    <MediaImage
+                      image={teamImages[i]}
+                      ratio="aspect-[4/5]"
+                      sizes="(max-width: 640px) 100vw, 31vw"
+                      imgClassName="transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <h3 className="headline-serif mt-5 text-2xl text-ink">{member.name}</h3>
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-ocean">{member.role}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-deep py-20 text-center text-ivory sm:py-24">
+        <div className="container-site">
+          <Reveal>
+            <p className="font-serif text-3xl font-semibold italic sm:text-4xl">«{restaurant.brandLine}»</p>
+          </Reveal>
+          <Reveal delay={0.12} className="mt-8">
+            <a href={restaurant.reservationUrl} target="_blank" rel="noopener noreferrer" data-testid="about-reserve-cta" className="btn-primary !bg-ivory !text-deep hover:!bg-ocean hover:!text-ivory">
+              {copy.nav.reserve}
+            </a>
+          </Reveal>
+        </div>
+      </section>
+    </main>
+  </>
+);
 
 export default AboutPage;

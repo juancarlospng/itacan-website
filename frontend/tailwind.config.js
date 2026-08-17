@@ -14,18 +14,18 @@ module.exports = {
       },
       colors: {
         deep: {
-          DEFAULT: '#074269',
-          dark: '#052F4C',
-          light: '#0D5586'
+          DEFAULT: '#074169',
+          dark: '#053154',
+          light: '#0C568C'
         },
         ocean: {
-          DEFAULT: '#2E73A6',
-          light: '#5E97C0'
+          DEFAULT: '#237FAE',
+          light: '#5FA3C7'
         },
-        ivory: '#F5F1EA',
+        ivory: '#F4F2EC',
         sand: {
-          DEFAULT: '#D9CFBF',
-          dark: '#C4B7A3'
+          DEFAULT: '#D8D0C4',
+          dark: '#C3B8A7'
         },
         ink: {
           DEFAULT: '#111820',
@@ -67,10 +67,10 @@ module.exports = {
       },
       fontFamily: {
         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
-        sans: ['Manrope', 'system-ui', 'sans-serif']
+        sans: ['Montserrat', 'system-ui', 'sans-serif']
       },
       letterSpacing: {
-        eyebrow: '0.32em'
+        eyebrow: '0.28em'
       },
       keyframes: {
         'accordion-down': {
@@ -80,16 +80,11 @@ module.exports = {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' }
-        },
-        'kenburns': {
-          from: { transform: 'scale(1.12)' },
-          to: { transform: 'scale(1)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
-        'kenburns': 'kenburns 7s cubic-bezier(0.22, 1, 0.36, 1) forwards'
+        'accordion-up': 'accordion-up 0.2s ease-out'
       }
     }
   },

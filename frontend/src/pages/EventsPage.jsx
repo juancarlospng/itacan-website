@@ -1,83 +1,88 @@
-import { Instagram } from "lucide-react";
 import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
-import WaveDivider from "../components/WaveDivider";
+import MediaImage from "../components/MediaImage";
+import SectionHeading from "../components/SectionHeading";
 import EventCard from "../components/EventCard";
-import ReservationCTA from "../components/ReservationCTA";
-import EditorialMarquee from "../components/EditorialMarquee";
-import { useLanguage } from "../i18n/LanguageContext";
+import GroupOffers from "../components/GroupOffers";
+import EventInquiryForm from "../components/EventInquiryForm";
+import { copy } from "../copy/de";
 import { activeEvents } from "../data/events";
-import { restaurant } from "../config/restaurant";
-import { images } from "../config/images";
+import { media } from "../config/media";
 
 const EventsPage = () => {
-  const { t, lang } = useLanguage();
   const upcoming = activeEvents();
 
   return (
     <>
-      <SEO title={t("seo.events.title")} description={t("seo.events.desc")} path="/events" />
-      <section className="bg-deep pb-20 pt-40 text-ivory sm:pt-48" data-testid="events-header">
-        <div className="container-site">
+      <SEO title={copy.seo.events.title} description={copy.seo.events.desc} path="/events" />
+
+      {/* Private events hero — the commercial core of this page */}
+      <section className="relative flex min-h-[62svh] items-end overflow-hidden bg-deep" data-testid="events-hero">
+        <div className="absolute inset-0">
+          <img src={media.eventsFireplace.src} alt={media.eventsFireplace.alt} style={{ objectPosition: media.eventsFireplace.position }} className="h-full w-full object-cover" />
+        </div>
+        <div className="absolute inset-0 bg-deep/60" aria-hidden="true" />
+        <div className="container-site relative pb-16 pt-44 text-ivory sm:pb-20">
           <Reveal>
-            <p className="eyebrow text-ocean-light">{t("events.eyebrow")}</p>
+            <h1 className="headline-serif max-w-3xl text-4xl sm:text-6xl">{copy.eventsPage.heroHeadline}</h1>
           </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="headline-serif mt-5 max-w-3xl text-4xl sm:text-6xl lg:text-7xl">{t("events.pageTitle")}</h1>
+          <Reveal delay={0.14}>
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-ivory/80 sm:text-lg">{copy.eventsPage.heroCopy}</p>
           </Reveal>
-          <Reveal delay={0.18}>
-            <WaveDivider className="mt-7 w-28 text-ocean-light" />
-          </Reveal>
-          <Reveal delay={0.24}>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-ivory/75 sm:text-lg">{t("events.pageCopy")}</p>
+          <Reveal delay={0.22} className="mt-9">
+            <a href="#anfrage" data-testid="events-hero-cta" className="btn-primary !bg-ivory !text-deep hover:!bg-ocean hover:!text-ivory">
+              {copy.eventsPage.heroCta}
+            </a>
           </Reveal>
         </div>
       </section>
 
-      <EditorialMarquee tone="deep" />
-
-      <main className="container-site py-20 sm:py-28" data-testid="events-content">
-        {upcoming.length > 0 ? (
-          <div className="grid gap-8">
-            {upcoming.map((e) => (
-              <Reveal key={e.id}>
-                <EventCard event={e} lang={lang} />
-              </Reveal>
-            ))}
+      {/* Public events — renders only when active events exist */}
+      {upcoming.length > 0 && (
+        <section className="py-24 sm:py-28" data-testid="public-events-section">
+          <div className="container-site">
+            <SectionHeading eyebrow={copy.eventsPage.publicEyebrow} title={copy.eventsPage.publicHeadline} />
+            <div className="mt-12 grid gap-8">
+              {upcoming.map((e) => (
+                <Reveal key={e.id}>
+                  <EventCard event={e} />
+                </Reveal>
+              ))}
+            </div>
           </div>
-        ) : (
+        </section>
+      )}
+
+      <main className="container-site py-24 sm:py-28" data-testid="events-content">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {copy.eventsPage.types.map((type, i) => (
+            <Reveal key={type.title} delay={i * 0.08}>
+              <article data-testid={`event-type-${i}`} className="h-full border-t-2 border-deep pt-6">
+                <span className="font-serif text-4xl font-semibold italic text-ocean/50" aria-hidden="true">0{i + 1}</span>
+                <h2 className="headline-serif mt-3 text-2xl text-ink">{type.title}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">{type.copy}</p>
+              </article>
+            </Reveal>
+          ))}
+        </div>
+
+        <div className="mt-20">
+          <GroupOffers />
+        </div>
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2">
           <Reveal>
-            <div className="relative overflow-hidden rounded-sm bg-deep p-10 text-ivory sm:p-16" data-testid="events-empty-state">
-              <img src={images.nightlife.url} alt={images.nightlife.alt} loading="lazy" className="absolute inset-0 h-full w-full object-cover opacity-25" />
-              <div className="relative">
-                <h2 className="headline-serif max-w-lg text-4xl sm:text-5xl">{t("events.emptyTitle")}</h2>
-                <p className="mt-5 max-w-md text-base leading-relaxed text-ivory/75">{t("events.emptyCopy")}</p>
-                <a href={restaurant.instagramUrl} target="_blank" rel="noopener noreferrer" data-testid="events-instagram-button" className="btn-primary mt-9 !bg-ivory !text-deep hover:!bg-ocean hover:!text-ivory">
-                  <Instagram className="h-4 w-4" strokeWidth={1.8} aria-hidden="true" /> {t("events.followInstagram")}
-                </a>
-              </div>
-            </div>
+            <MediaImage image={media.atmospherePrimary} ratio="aspect-[16/9]" className="rounded-sm" />
           </Reveal>
-        )}
+          <Reveal delay={0.1}>
+            <MediaImage image={media.barSecondaryA} ratio="aspect-[16/9]" className="rounded-sm" />
+          </Reveal>
+        </div>
 
-        <Reveal className="mt-16">
-          <div className="grid items-center gap-8 rounded-sm border border-sand-dark/60 bg-sand/30 p-10 sm:p-14 md:grid-cols-[1fr_auto]" data-testid="private-event-section">
-            <div>
-              <h2 className="headline-serif text-3xl text-ink sm:text-4xl">{t("events.privateTitle")}</h2>
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-ink-soft sm:text-base">{t("events.privateCopy")}</p>
-            </div>
-            <a
-              href={`mailto:${restaurant.email}?subject=${encodeURIComponent("Event-Anfrage ITACAN")}`}
-              data-testid="private-event-button"
-              className="btn-primary"
-            >
-              {t("events.privateCta")}
-            </a>
-          </div>
-        </Reveal>
+        <div id="anfrage" className="mt-24 scroll-mt-36 rounded-sm border border-sand-dark/60 bg-sand/25 p-7 sm:p-12 lg:p-16">
+          <EventInquiryForm />
+        </div>
       </main>
-
-      <ReservationCTA />
     </>
   );
 };

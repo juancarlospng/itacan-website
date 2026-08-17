@@ -1,20 +1,15 @@
-import WaveDivider from "./WaveDivider";
-
-const Logo = ({ tone = "dark", compact = false }) => {
-  const wordColor = tone === "light" ? "text-ivory" : "text-deep";
-  return (
-    <span className="inline-flex flex-col items-start leading-none" data-testid="itacan-logo">
-      <span className={`font-serif font-semibold tracking-[0.18em] ${wordColor} ${compact ? "text-2xl" : "text-3xl sm:text-4xl"}`}>
-        ITACAN
-      </span>
-      {!compact && (
-        <span className={`mt-1 font-sans text-[0.55rem] font-semibold uppercase tracking-[0.3em] ${tone === "light" ? "text-ivory/70" : "text-ink-soft"}`}>
-          Restaurant • Bar • Pinseria
-        </span>
-      )}
-      <WaveDivider className={`mt-1.5 w-16 ${tone === "light" ? "text-ocean-light" : "text-ocean"}`} />
-    </span>
-  );
-};
+/**
+ * Official ITACAN logo (brand/ITACAN_LOGO.svg).
+ * The supplied SVG is dark-on-transparent; on Deep Blue surfaces it is
+ * inverted to ivory via CSS filter. Never redraw or re-typeset the logo.
+ */
+const Logo = ({ tone = "light", className = "h-9" }) => (
+  <img
+    src="/assets/itacan/brand/ITACAN_LOGO.svg"
+    alt="ITACAN — Restaurant • Bar • Pinseria"
+    className={`${className} w-auto ${tone === "light" ? "brightness-0 invert" : ""}`}
+    data-testid="itacan-logo"
+  />
+);
 
 export default Logo;

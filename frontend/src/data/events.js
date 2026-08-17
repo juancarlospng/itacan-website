@@ -1,21 +1,8 @@
 /**
- * ITACAN Events — structured event data.
- *
- * type Event = {
- *   id: string
- *   title: string
- *   date: string        // ISO date, e.g. "2026-08-14" — past events disappear automatically
- *   startTime?: string  // e.g. "21:00"
- *   endTime?: string
- *   description?: string
- *   image?: string
- *   ctaUrl?: string
- *   active: boolean
- * }
- *
- * No events are currently published by ITACAN — the page automatically shows
- * the "Neue Events folgen bald." empty state. Add upcoming events here.
- * Do NOT invent events.
+ * ITACAN public events — data-driven.
+ * Event = { id, title, date (ISO), time?, description?, image?, ctaUrl?, status: "active" | "inactive" }
+ * Expired or inactive events are automatically hidden. No events → the whole
+ * public-events section hides itself. Do NOT invent events.
  */
 
 export const events = [];
@@ -24,6 +11,6 @@ export const activeEvents = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   return events
-    .filter((e) => e.active && new Date(e.date) >= today)
+    .filter((e) => e.status === "active" && new Date(`${e.date}T23:59:59`) >= today)
     .sort((a, b) => new Date(a.date) - new Date(b.date));
 };

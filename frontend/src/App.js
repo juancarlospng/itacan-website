@@ -1,82 +1,81 @@
 import { useEffect } from "react";
 import "@/App.css";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Lenis from "lenis";
-import { LanguageProvider } from "@/i18n/LanguageContext";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import MobileActionBar from "@/components/MobileActionBar";
 import HomePage from "@/pages/HomePage";
 import MenuPage from "@/pages/MenuPage";
 import EventsPage from "@/pages/EventsPage";
 import AboutPage from "@/pages/AboutPage";
 import ContactPage from "@/pages/ContactPage";
-import { DatenschutzPage, AgbPage } from "@/pages/LegalPage";
+import { ImpressumPage, DatenschutzPage, AgbPage } from "@/pages/LegalPage";
+import { restaurant } from "@/config/restaurant";
 
-const useLenis = () => {
+const ScrollManager = () => {
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReduced) return undefined;
-    const lenis = new Lenis({ duration: 1.15, smoothWheel: true });
-    window.__lenis = lenis;
-    let rafId;
-    const raf = (time) => {
-      lenis.raf(time);
-      rafId = requestAnimationFrame(raf);
-    };
-    rafId = requestAnimationFrame(raf);
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-      window.__lenis = undefined;
-    };
-  }, []);
-};
-
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
+    if (hash) {
+      const el = document.querySelector(hash);
+      if (el) {
+        const timer = setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+        return () => clearTimeout(timer);
+      }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+    return undefined;
+  }, [pathname, hash]);
   return null;
 };
 
-const Shell = () => {
-  useLenis();
-  return (
-    <>
-      <ScrollToTop />
-      <a
-        href="#main-content"
-        data-testid="skip-to-content-link"
-        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-sm focus:bg-deep focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ivory"
-      >
-        Zum Inhalt springen
-      </a>
-      <SiteHeader />
-      <div id="main-content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/speisekarte" element={<MenuPage />} />
-          <Route path="/events" element={<EventsPage />} />
-          <Route path="/ueber-itacan" element={<AboutPage />} />
-          <Route path="/kontakt" element={<ContactPage />} />
-          <Route path="/datenschutz" element={<DatenschutzPage />} />
-          <Route path="/agb" element={<AgbPage />} />
-          <Route path="*" element={<HomePage />} />
-        </Routes>
-      </div>
-      <SiteFooter />
-    </>
-  );
+// Legacy: /tisch-reservieren → official MyLOCALINA reservation flow
+const ReservationRedirect = () => {
+  useEffect(() => {
+    window.location.replace(restaurant.reservationUrl);
+  }, []);
+  return null;
 };
+
+const Shell = () => (
+  <>
+    <ScrollManager />
+    <a
+      href="#main-content"
+      data-testid="skip-to-content-link"
+      className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-sm focus:bg-deep focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ivory"
+    >
+      Zum Inhalt springen
+    </a>
+    <SiteHeader />
+    <div id="main-content">
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/speisekarte" element={<MenuPage />} />
+        <Route path="/ueber-uns" element={<AboutPage />} />
+        <Route path="/events" element={<EventsPage />} />
+        <Route path="/kontakt" element={<ContactPage />} />
+        <Route path="/impressum" element={<ImpressumPage />} />
+        <Route path="/datenschutz" element={<DatenschutzPage />} />
+        <Route path="/agb" element={<AgbPage />} />
+        {/* Legacy URL redirects */}
+        <Route path="/speisekarten" element={<Navigate to="/speisekarte" replace />} />
+        <Route path="/ueber-itacan" element={<Navigate to="/ueber-uns" replace />} />
+        <Route path="/experiences" element={<Navigate to="/events" replace />} />
+        <Route path="/refer-friends" element={<Navigate to="/" replace />} />
+        <Route path="/tisch-reservieren" element={<ReservationRedirect />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </div>
+    <MobileActionBar />
+    <SiteFooter />
+  </>
+);
 
 function App() {
   return (
-    <LanguageProvider>
-      <BrowserRouter>
-        <Shell />
-      </BrowserRouter>
-    </LanguageProvider>
+    <BrowserRouter>
+      <Shell />
+    </BrowserRouter>
   );
 }
 

@@ -1,29 +1,32 @@
 import { Link } from "react-router-dom";
 import { Instagram, MapPin, Phone, Mail } from "lucide-react";
 import Logo from "./Logo";
-import WaveDivider from "./WaveDivider";
-import { useLanguage } from "../i18n/LanguageContext";
+import { copy } from "../copy/de";
 import { restaurant } from "../config/restaurant";
 
+const TikTokIcon = ({ className }) => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className={className} aria-hidden="true">
+    <path d="M9 12a4 4 0 1 0 4 4V4c.6 2.5 2.4 4.3 5 4.6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 const SiteFooter = () => {
-  const { t, lang } = useLanguage();
   const year = new Date().getFullYear();
 
   const navLinks = [
-    { to: "/speisekarte", label: t("nav.menu"), testId: "footer-menu-link" },
-    { to: "/events", label: t("nav.events"), testId: "footer-events-link" },
-    { to: "/ueber-itacan", label: t("nav.about"), testId: "footer-about-link" },
-    { to: "/kontakt", label: t("nav.contact"), testId: "footer-contact-link" },
+    { to: "/speisekarte", label: copy.nav.menu, testId: "footer-menu-link" },
+    { to: "/ueber-uns", label: copy.nav.about, testId: "footer-about-link" },
+    { to: "/events", label: copy.nav.events, testId: "footer-events-link" },
+    { to: "/kontakt", label: copy.nav.contact, testId: "footer-contact-link" },
   ];
 
   return (
-    <footer data-testid="site-footer" className="bg-deep text-ivory">
-      <WaveDivider className="w-full bg-ivory text-deep" flip />
-      <div className="container-site grid gap-14 py-20 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+    <footer id="site-footer" data-testid="site-footer" className="bg-deep text-ivory">
+      <div className="container-site grid gap-12 py-16 sm:py-20 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Logo tone="light" />
-          <p className="mt-6 max-w-xs font-serif text-xl italic text-ivory/70">{t("footer.tagline")}</p>
-          <address className="mt-8 not-italic">
+          <Logo tone="light" className="h-10" />
+          <p className="mt-5 max-w-xs font-serif text-xl italic text-ivory/70">{restaurant.brandLine}</p>
+          <address className="mt-7 not-italic">
             <p className="text-sm leading-relaxed text-ivory/75">
               {restaurant.legalName}
               <br />
@@ -35,7 +38,7 @@ const SiteFooter = () => {
         </div>
 
         <nav aria-label="Footer Navigation">
-          <h3 className="eyebrow text-ocean-light">{t("footer.navTitle")}</h3>
+          <h3 className="eyebrow text-ocean-light">{copy.footer.navTitle}</h3>
           <ul className="mt-6 space-y-3">
             {navLinks.map((l) => (
               <li key={l.to}>
@@ -46,14 +49,14 @@ const SiteFooter = () => {
             ))}
             <li>
               <a href={restaurant.reservationUrl} target="_blank" rel="noopener noreferrer" data-testid="footer-reserve-link" className="link-underline text-sm text-ivory/75">
-                {t("nav.reserve")}
+                {copy.nav.reserve}
               </a>
             </li>
           </ul>
         </nav>
 
         <div>
-          <h3 className="eyebrow text-ocean-light">{t("footer.contactTitle")}</h3>
+          <h3 className="eyebrow text-ocean-light">{copy.footer.contactTitle}</h3>
           <ul className="mt-6 space-y-3 text-sm text-ivory/75">
             <li>
               <a href={restaurant.phoneHref} data-testid="footer-phone-link" className="link-underline inline-flex items-center gap-2">
@@ -70,39 +73,48 @@ const SiteFooter = () => {
                 <MapPin className="h-3.5 w-3.5" strokeWidth={1.8} aria-hidden="true" /> {restaurant.address.street}, {restaurant.address.city}
               </a>
             </li>
+            <li>
+              <a href={restaurant.instagramUrl} target="_blank" rel="noopener noreferrer" data-testid="footer-instagram-link" className="link-underline inline-flex items-center gap-2">
+                <Instagram className="h-3.5 w-3.5" strokeWidth={1.8} aria-hidden="true" /> Instagram
+              </a>
+            </li>
+            <li>
+              <a href={restaurant.tiktokUrl} target="_blank" rel="noopener noreferrer" data-testid="footer-tiktok-link" className="link-underline inline-flex items-center gap-2">
+                <TikTokIcon className="h-3.5 w-3.5" /> TikTok
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
-          <h3 className="eyebrow text-ocean-light">{t("footer.followTitle")}</h3>
+          <h3 className="eyebrow text-ocean-light">{copy.footer.legalTitle}</h3>
           <ul className="mt-6 space-y-3 text-sm text-ivory/75">
             <li>
-              <a href={restaurant.instagramUrl} target="_blank" rel="noopener noreferrer" data-testid="footer-instagram-link" className="link-underline inline-flex items-center gap-2">
-                <Instagram className="h-3.5 w-3.5" strokeWidth={1.8} aria-hidden="true" /> @itacan.ch
-              </a>
+              <Link to="/impressum" data-testid="footer-impressum-link" className="link-underline">{copy.footer.impressum}</Link>
             </li>
             <li>
-              <a href={restaurant.justEatUrl} target="_blank" rel="noopener noreferrer" data-testid="footer-justeat-link" className="link-underline">
-                Just Eat
-              </a>
+              <Link to="/datenschutz" data-testid="footer-privacy-link" className="link-underline">{copy.footer.privacy}</Link>
             </li>
             <li>
-              <a href={restaurant.uberEatsUrl} target="_blank" rel="noopener noreferrer" data-testid="footer-ubereats-link" className="link-underline">
-                Uber Eats
-              </a>
+              <Link to="/agb" data-testid="footer-terms-link" className="link-underline">{copy.footer.terms}</Link>
+            </li>
+          </ul>
+          <h3 className="eyebrow mt-8 text-ocean-light">{copy.footer.orderOnline}</h3>
+          <ul className="mt-4 space-y-3 text-sm text-ivory/75">
+            <li>
+              <a href={restaurant.justEatUrl} target="_blank" rel="noopener noreferrer" data-testid="footer-justeat-link" className="link-underline">Just Eat</a>
+            </li>
+            <li>
+              <a href={restaurant.uberEatsUrl} target="_blank" rel="noopener noreferrer" data-testid="footer-ubereats-link" className="link-underline">Uber Eats</a>
             </li>
           </ul>
         </div>
       </div>
 
       <div className="border-t border-ivory/10">
-        <div className="container-site flex flex-col items-start justify-between gap-4 py-7 text-xs text-ivory/50 sm:flex-row sm:items-center">
-          <p>© {year} {restaurant.name} · {t("footer.rights")}</p>
-          <div className="flex flex-wrap items-center gap-6">
-            <Link to="/datenschutz" data-testid="footer-privacy-link" className="link-underline">{t("footer.privacy")}</Link>
-            <Link to="/agb" data-testid="footer-terms-link" className="link-underline">{t("footer.terms")}</Link>
-            <span className="text-ivory/35">{t("footer.credit")}</span>
-          </div>
+        <div className="container-site flex flex-col items-start justify-between gap-3 py-6 text-xs text-ivory/50 sm:flex-row sm:items-center">
+          <p>© {year} {restaurant.name} · {copy.footer.rights}</p>
+          <span className="text-ivory/35">{copy.footer.credit}</span>
         </div>
       </div>
     </footer>
