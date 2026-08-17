@@ -167,7 +167,7 @@ export const copy = {
     privacy: "Datenschutz",
     terms: "AGB",
     rights: "Alle Rechte vorbehalten.",
-    credit: "Digital experience by Blue Technologies",
+    credit: "Digital experience by BLUEETHER",
     orderOnline: "Online bestellen",
   },
   legal: {

@@ -9,9 +9,11 @@ import { restaurant } from "../config/restaurant";
 
 /**
  * ITACAN signature navbar wave.
- * Delicate low-amplitude wave forming the navbar's bottom edge.
- * Reacts almost subconsciously to scroll direction (small horizontal phase
- * shift, springs back when idle). Static under prefers-reduced-motion.
+ * Structure: the navbar and the wave viewport are always 100% wide and never
+ * move. Inside an overflow-hidden viewport sits a 120vw wave track, offset
+ * -10vw; only the track's phase animates (small scroll-reactive x, springs
+ * back when idle), so the Deep Blue wave can never expose an edge gap.
+ * Static under prefers-reduced-motion.
  */
 const NavbarWave = ({ solid }) => {
   const x = useMotionValue(0);
@@ -27,7 +29,7 @@ const NavbarWave = ({ solid }) => {
       const y = window.scrollY;
       const delta = y - lastY.current;
       lastY.current = y;
-      const target = Math.max(-26, Math.min(26, x.get() + delta * 0.35));
+      const target = Math.max(-30, Math.min(30, x.get() + delta * 0.4));
       x.set(target);
       clearTimeout(idleTimer.current);
       idleTimer.current = setTimeout(() => x.set(0), 160);
@@ -40,18 +42,15 @@ const NavbarWave = ({ solid }) => {
   }, [x]);
 
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-full -mt-px h-[9px] overflow-hidden sm:h-[14px]">
-      <motion.svg
-        style={{ x: springX }}
-        viewBox="0 0 2880 28"
-        preserveAspectRatio="none"
-        className="h-full w-[112%] -translate-x-[5%]"
-      >
-        <path
-          d="M0 0 H2880 V9 C2520 25 2280 3 1920 13 C1560 23 1320 5 960 13 C600 21 330 7 0 17 Z"
-          className={`transition-[fill] duration-500 ${solid ? "fill-deep" : "fill-transparent"}`}
-        />
-      </motion.svg>
+    <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 top-full -mt-px h-[12px] overflow-hidden sm:h-[18px]">
+      <motion.div style={{ x: springX }} className="absolute inset-y-0 left-[-10vw] w-[120vw]">
+        <svg viewBox="0 0 2880 36" preserveAspectRatio="none" className="block h-full w-full">
+          <path
+            d="M0 0 H2880 V8 C2520 29 2280 3 1920 15 C1560 27 1320 5 960 15 C600 25 330 6 0 18 Z"
+            className={`transition-[fill] duration-500 ${solid ? "fill-deep" : "fill-transparent"}`}
+          />
+        </svg>
+      </motion.div>
     </div>
   );
 };

@@ -8,6 +8,7 @@ import SectionHeading from "../components/SectionHeading";
 import MenuDiscovery from "../components/MenuDiscovery";
 import GroupOffers, { EventsHomeCtas } from "../components/GroupOffers";
 import BusinessHours from "../components/BusinessHours";
+import LazyMap from "../components/LazyMap";
 import { copy } from "../copy/de";
 import { media } from "../config/media";
 import { restaurant } from "../config/restaurant";
@@ -40,7 +41,7 @@ const Hero = () => (
     <div className="absolute inset-0 bg-deep/55" aria-hidden="true" />
     <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-deep/85 to-transparent" aria-hidden="true" />
 
-    <div className="container-site relative pb-24 pt-44 sm:pb-28">
+    <div className="container-site relative pb-24 pt-48 sm:pb-28">
       <h1 className="headline-serif text-ivory" data-testid="hero-headline">
         <span className="block overflow-hidden pb-1">
           <motion.span
@@ -328,17 +329,7 @@ const Visit = () => (
           </Reveal>
         </div>
         <Reveal delay={0.15}>
-          <div className="h-[350px] overflow-hidden rounded-sm sm:h-[450px] lg:h-[560px]">
-            <iframe
-              title={copy.visit.mapTitle}
-              src={restaurant.googleMapsEmbed}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              allowFullScreen
-              data-testid="visit-map"
-              className="h-full w-full grayscale-[20%]"
-            />
-          </div>
+          <LazyMap title={copy.visit.mapTitle} testId="visit-map" />
         </Reveal>
       </div>
     </div>

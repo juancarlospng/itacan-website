@@ -3,6 +3,7 @@ import SEO from "../components/SEO";
 import Reveal from "../components/Reveal";
 import MediaImage from "../components/MediaImage";
 import BusinessHours from "../components/BusinessHours";
+import LazyMap from "../components/LazyMap";
 import { copy } from "../copy/de";
 import { media } from "../config/media";
 import { restaurant } from "../config/restaurant";
@@ -86,17 +87,7 @@ const ContactPage = () => {
 
         <div className="space-y-6">
           <Reveal delay={0.1}>
-            <div className="h-[350px] overflow-hidden rounded-sm border border-sand-dark/60 sm:h-[420px] lg:h-[480px]">
-              <iframe
-                title={copy.visit.mapTitle}
-                src={restaurant.googleMapsEmbed}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                allowFullScreen
-                data-testid="contact-map"
-                className="h-full w-full grayscale-[20%]"
-              />
-            </div>
+            <LazyMap title={copy.visit.mapTitle} testId="contact-map" className="h-[350px] sm:h-[420px] lg:h-[480px] !border-sand-dark/60 !bg-sand/25" />
           </Reveal>
           <Reveal delay={0.16}>
             <MediaImage image={media.visitSupport} ratio="aspect-[3/2]" className="rounded-sm" sizes="(max-width: 1024px) 100vw, 45vw" />

@@ -43,3 +43,11 @@ Legacy redirects: /speisekarten→/speisekarte, /ueber-itacan→/ueber-uns, /exp
 - P0: Legal texts, production launch/DNS (not deployed per spec)
 - P1: Cocktail menu when supplied; first real public events; EN version (copy architecture ready)
 - P2: OG share image from final photography
+
+## Refinement Pass (2026-08-17)
+- Navbar wave edge bug fixed structurally: navbar + wave viewport permanently 100% wide; 120vw wave track at -10vw inside overflow-hidden viewport; only the inner track phase animates (±30px, springs back when idle, reduced-motion safe). Pixel-verified at 1920/1440/1024/768/390 × scroll up/down: zero edge gaps. Wave presence increased ~30% (band 12/18px, larger amplitude).
+- Menu Discovery: rails now near edge-to-edge (headings stay on the editorial grid); cards 300–340px (≈4.5 visible on large desktop, 1.2 on mobile); rounded-[10px] + soft diffuse shadow; adaptive mask fade at rail ends (disappears at start/end); photos only for confirmed dishes (Bufala & Mortadella, Pica Pollo, Babà) — all others use branded Deep Blue category tiles, no mislabeled photos.
+- Homepage Visit section: shared LazyMap component (IntersectionObserver, src assigned near viewport) used on Home + /kontakt; desktop 40/60 composition, mobile contact-first stacking, heights 560px/348px.
+- Mobile hero top padding increased (pt-48) — full headline always clear of the navbar.
+- Footer credit changed to "Digital experience by BLUEETHER".
+- Verified: yarn build passes, pixel-level wave checks, mobile + desktop screenshots of hero/rails/map/footer.
