@@ -3,7 +3,7 @@ import axios from "axios";
 import { Send, MessageCircle, Mail } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import Reveal from "./Reveal";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { restaurant } from "../config/restaurant";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;

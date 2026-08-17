@@ -4,7 +4,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import SectionHeading from "./SectionHeading";
 import Reveal from "./Reveal";
 import MediaImage from "./MediaImage";
-import { copy } from "../copy/de";
+import { copy } from "../copy";
 import { discoveryRails, railItems, CURRENCY } from "../data/menu";
 import { media } from "../config/media";
 
