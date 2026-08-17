@@ -2,6 +2,7 @@ import { copy as de } from "./de";
 import { fr } from "./fr";
 import { it } from "./it";
 import { en } from "./en";
+import { es } from "./es";
 
 const merge = (base, override) => {
   if (Array.isArray(override)) return override;
@@ -11,7 +12,7 @@ const merge = (base, override) => {
   );
 };
 
-const dictionaries = { de, fr: merge(de, fr), it: merge(de, it), en: merge(de, en) };
+const dictionaries = { de, fr: merge(de, fr), it: merge(de, it), es: merge(de, es), en: merge(de, en) };
 
 export let copy = de;
 
