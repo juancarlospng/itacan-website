@@ -34,7 +34,7 @@ const LanguageSelector = () => {
     <div
       ref={selectorRef}
       data-testid="language-selector"
-      className="relative"
+      className="relative z-10"
     >
       <button
         type="button"
@@ -57,7 +57,7 @@ const LanguageSelector = () => {
         <div
           role="listbox"
           aria-label="Language · Sprache · Langue · Lingua"
-          className="absolute right-0 top-full mt-2 min-w-[8.5rem] overflow-hidden rounded-sm border border-ivory/20 bg-deep p-1 shadow-[0_16px_36px_rgba(4,35,57,0.28)]"
+          className="absolute right-0 top-full z-20 mt-2 min-w-[8.5rem] overflow-hidden rounded-sm border border-ivory/20 bg-deep p-1 shadow-[0_16px_36px_rgba(4,35,57,0.28)]"
         >
           {languages.map(({ code, label }) => (
             <button
