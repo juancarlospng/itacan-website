@@ -90,7 +90,13 @@ const ContactPage = () => {
             <LazyMap title={copy.visit.mapTitle} testId="contact-map" className="h-[350px] sm:h-[420px] lg:h-[480px] !border-sand-dark/60 !bg-sand/25" />
           </Reveal>
           <Reveal delay={0.16}>
-            <MediaImage image={media.visitSupport} ratio="aspect-[3/2]" className="rounded-sm" sizes="(max-width: 1024px) 100vw, 45vw" />
+            <MediaImage
+              image={media.visitSupport}
+              ratio="aspect-[3/2]"
+              className="rounded-sm"
+              imgClassName="rotate-90 scale-150"
+              sizes="(max-width: 1024px) 100vw, 45vw"
+            />
           </Reveal>
         </div>
       </main>
